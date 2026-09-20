@@ -11,17 +11,22 @@ window.SITE_CONFIG = {
   /* --------------------------------------------------------
      1) WHATSAPP
      Formato: código do país + DDD + número, SOMENTE dígitos.
-     Exemplo: "5548999999999"  (55 = Brasil, 48 = DDD)
-     >>> SUBSTITUA o valor abaixo pelo número real. <<<
+     Exemplo de formato: "55" + DDD + número, SOMENTE dígitos.
+     >>> PENDENTE: nenhum número foi fornecido ainda, por isso
+     está vazio. Enquanto estiver vazio, os botões de WhatsApp
+     e o botão flutuante ficam INATIVOS (não levam a número
+     incorreto). Preencha para ativar tudo de uma vez. <<<
      -------------------------------------------------------- */
-  whatsapp: "5500000000000",
+  whatsapp: "",
 
   /* Mensagens pré-preenchidas dos botões de WhatsApp
-     (agenda = CTA principal e CTA final, combo = promoção). */
+     (agenda = CTA principal e CTA final, combo = promoção,
+      float = botão flutuante). */
   whatsappMessages: {
     agenda: "Olá, Maria! Vim pelo site e gostaria de consultar a agenda.",
     combo: "Olá, Maria! Vim pelo site e quero aproveitar o Combo Amigas (23% OFF) com uma amiga.",
-    agendar: "Olá, Maria! Vim pelo site e gostaria de agendar um horário."
+    agendar: "Olá, Maria! Vim pelo site e gostaria de agendar um horário.",
+    float: "Olá, Maria! Vim pelo site e gostaria de agendar um horário."
   },
 
   /* --------------------------------------------------------

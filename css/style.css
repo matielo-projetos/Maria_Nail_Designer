@@ -15,7 +15,7 @@
   --radius: 16px;
   --radius-lg: 22px;
   --gap: 1rem;
-  --section-y: 3.25rem;
+  --section-y: 2.25rem;
   --shadow: 0 6px 20px rgba(60, 50, 48, .06);
 }
 
@@ -65,6 +65,9 @@ img, svg { display: block; max-width: 100%; }
   z-index: 20;
 }
 .skip-link:focus { left: 1rem; top: .5rem; }
+
+/* Compensa o cabecalho fixo ao navegar pelas ancoras */
+section[id] { scroll-margin-top: 5.25rem; }
 
 
 /* ---------- CABEÇALHO ---------- */
@@ -167,6 +170,14 @@ img, svg { display: block; max-width: 100%; }
 
 .btn--lg { min-height: 3.35rem; padding: .95rem 2rem; }
 
+/* CTA principal: maior peso visual, sem exagero */
+.btn--cta {
+  min-height: 3.5rem;
+  padding: 1rem 2.25rem;
+  font-size: 1rem;
+  box-shadow: 0 8px 22px rgba(185, 121, 122, .28);
+}
+
 .btn--rose { background: var(--rose); color: #4a2f2f; }
 .btn--rose:hover { background: var(--rose-deep); color: var(--white); }
 
@@ -180,35 +191,43 @@ img, svg { display: block; max-width: 100%; }
 }
 .btn--outline:hover { background: var(--rose-soft); }
 
+/* Botão visível, porém sem destino configurado ainda */
+.btn.is-pending { opacity: .72; cursor: default; }
+
 
 /* ---------- SEÇÕES ---------- */
 
 .section { padding: var(--section-y) 0; }
 
 .section--last {
-  padding-bottom: calc(var(--section-y) + 1rem);
+  padding-bottom: calc(var(--section-y) + .75rem);
   text-align: center;
 }
 
 .section__title {
   font-size: 1.4rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.1rem;
 }
 
 .hero {
-  padding: 3.5rem 0 3rem;
+  padding: 2.75rem 0 2.25rem;
   text-align: center;
 }
 
 .hero__title {
-  font-size: 1.75rem;
-  margin-bottom: .75rem;
+  font-size: clamp(1.6rem, 5.2vw, 2.35rem);
+  margin-bottom: .7rem;
 }
 
 .hero__text {
   color: var(--ink-soft);
   max-width: 34rem;
-  margin: 0 auto 1.75rem;
+  margin: 0 auto 1.5rem;
+}
+
+.hero__actions {
+  display: flex;
+  justify-content: center;
 }
 
 /* ---------- CARDS ---------- */
@@ -252,6 +271,23 @@ img, svg { display: block; max-width: 100%; }
 .card--rose { background: var(--rose-soft); }
 .card--yellow { background: var(--yellow); }
 
+/* Destaque do Combo Amigas: leve, sem exagero */
+.card--combo {
+  background: var(--rose-soft);
+  border: 1px solid var(--rose);
+  box-shadow: 0 10px 26px rgba(185, 121, 122, .16);
+}
+
+.card--combo .card__heading--lg { font-size: 1.6rem; }
+
+.card--combo .card__big {
+  display: inline-block;
+  padding: .3rem 1.1rem;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: #4a3f22;
+}
+
 .eyebrow {
   font-size: .72rem;
   font-weight: 600;
@@ -270,11 +306,40 @@ img, svg { display: block; max-width: 100%; }
 
 .card__text {
   color: var(--ink-soft);
-  margin-bottom: 1.5rem;
 }
 
 .card--feature .card__heading + .btn,
 .card--feature .card__text + .btn { margin-top: 1.25rem; }
+
+/* ---------- INSTAGRAM ---------- */
+
+.social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .85rem;
+  padding: 1.5rem 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.social__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--rose-soft);
+  color: var(--rose-deep);
+}
+
+.social__text {
+  color: var(--ink-soft);
+  font-size: .95rem;
+}
 
 /* ---------- LOCALIZAÇÃO ---------- */
 
@@ -338,10 +403,34 @@ img, svg { display: block; max-width: 100%; }
 
 .site-footer__copy { margin-top: .35rem; font-size: .8rem; }
 
+/* ---------- BOTÃO FLUTUANTE DE WHATSAPP ---------- */
+
+.wa-float {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 15;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--rose);
+  color: #4a2f2f;
+  box-shadow: 0 8px 20px rgba(60, 50, 48, .18);
+  transition: background-color .15s ease;
+}
+
+.wa-float:hover { background: var(--rose-deep); color: var(--white); }
+
+/* Sem número configurado o botão não aparece */
+.wa-float[hidden] { display: none; }
+
 /* ---------- DESKTOP ---------- */
 
 @media (min-width: 48rem) {
-  :root { --section-y: 4.5rem; }
+  :root { --section-y: 3.25rem; }
 
   .nav-toggle { display: none; }
 
@@ -367,15 +456,31 @@ img, svg { display: block; max-width: 100%; }
 
   .site-nav a:hover { color: var(--rose-deep); }
 
-  .hero { padding: 5rem 0 4rem; }
+  .hero { padding: 3.75rem 0 3rem; }
 
   .hero__title { font-size: 2.35rem; }
 
   .grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
 
-  .card--feature { padding: 2.75rem 2rem; }
+  .card--feature { padding: 2.25rem 2rem; }
 
   .card__big { font-size: 2.6rem; }
+
+  .social {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  .social__text { margin-right: .5rem; }
+
+  .wa-float {
+    right: 1.5rem;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    width: 3.5rem;
+    height: 3.5rem;
+  }
 }
 
 @media (min-width: 64rem) {

@@ -8,33 +8,48 @@
 
   /* ---------- 1. Links configuráveis ---------- */
 
+  /* Número do WhatsApp válido = apenas dígitos, com código do país (12 ou 13).
+     Sem número válido, nada aponta para telefone incorreto. */
+  function whatsappNumero() {
+    var digitos = String(config.whatsapp || "").replace(/\D/g, "");
+    return digitos.length >= 12 ? digitos : "";
+  }
+
   function whatsappUrl(mensagem) {
-    var numero = String(config.whatsapp || "").replace(/\D/g, "");
+    var numero = whatsappNumero();
+    if (!numero) { return null; }
+
     var base = "https://wa.me/" + numero;
     return mensagem ? base + "?text=" + encodeURIComponent(mensagem) : base;
   }
 
+  function mensagem(chave) {
+    var mensagens = config.whatsappMessages || {};
+    return mensagens[chave];
+  }
+
   function instagramUrl() {
     var usuario = String(config.instagram || "").replace(/^@/, "").replace(/\//g, "");
-    return "https://www.instagram.com/" + usuario + "/";
+    return usuario ? "https://www.instagram.com/" + usuario + "/" : null;
   }
 
   var LINKS = {
-    agenda: function () {
-      return whatsappUrl(config.whatsappMessages && config.whatsappMessages.agenda);
-    },
-    combo: function () {
-      return whatsappUrl(config.whatsappMessages && config.whatsappMessages.combo);
-    },
-    agendar: function () {
-      return whatsappUrl(config.whatsappMessages && config.whatsappMessages.agendar);
-    },
+    agenda: function () { return whatsappUrl(mensagem("agenda")); },
+    combo: function () { return whatsappUrl(mensagem("combo")); },
+    agendar: function () { return whatsappUrl(mensagem("agendar")); },
     sorteio: instagramUrl,
     instagram: instagramUrl,
-    maps: function () {
-      return config.maps || "#";
-    }
+    maps: function () { return config.maps || null; }
   };
+
+  /* Link ainda sem destino definido: fica visível, mas inerte. */
+  function marcarPendente(el) {
+    el.setAttribute("aria-disabled", "true");
+    el.classList.add("is-pending");
+    el.addEventListener("click", function (evento) {
+      evento.preventDefault();
+    });
+  }
 
   function aplicarLinks() {
     var elementos = document.querySelectorAll("[data-link]");
@@ -45,7 +60,10 @@
       if (!resolver) { return; }
 
       var url = resolver();
-      if (!url || url === "#") { return; }
+      if (!url) {
+        marcarPendente(el);
+        return;
+      }
 
       el.setAttribute("href", url);
 
@@ -57,7 +75,24 @@
     });
   }
 
-  /* ---------- 2. Menu mobile ---------- */
+  /* ---------- 2. Botão flutuante de WhatsApp ---------- */
+
+  function iniciarBotaoFlutuante() {
+    var botao = document.querySelector(".wa-float");
+    if (!botao) { return; }
+
+    var url = whatsappUrl(mensagem("float"));
+    if (!url) {
+      // Sem número configurado: o botão permanece oculto.
+      botao.hidden = true;
+      return;
+    }
+
+    botao.setAttribute("href", url);
+    botao.hidden = false;
+  }
+
+  /* ---------- 3. Menu mobile ---------- */
 
   function iniciarMenu() {
     var botao = document.querySelector(".nav-toggle");
@@ -87,7 +122,7 @@
     });
   }
 
-  /* ---------- 3. Ano do rodapé ---------- */
+  /* ---------- 4. Ano do rodapé ---------- */
 
   function atualizarAno() {
     var alvo = document.querySelector("[data-year]");
@@ -98,6 +133,7 @@
 
   function iniciar() {
     aplicarLinks();
+    iniciarBotaoFlutuante();
     iniciarMenu();
     atualizarAno();
   }

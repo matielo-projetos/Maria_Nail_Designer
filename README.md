@@ -23,11 +23,17 @@ Tudo fica em **`js/config.js`** (arquivo único):
 
 | O que | Chave em `js/config.js` |
 |---|---|
-| Número do WhatsApp (só dígitos: 55 + DDD + número) | `whatsapp` |
-| Mensagens dos botões de WhatsApp | `whatsappMessages` (`agenda`, `combo`, `agendar`) |
+| Número do WhatsApp (só dígitos: `55` + DDD + número) — **hoje está vazio (pendente)** | `whatsapp` |
+| Mensagens dos botões de WhatsApp | `whatsappMessages` (`agenda`, `combo`, `agendar`, `float`) |
 | Instagram (usuário, sem `@`) | `instagram` |
 | Google Maps | `maps` |
 | Domínio do site | `domain` |
+
+> **Pendente:** `whatsapp` está vazio porque nenhum número foi fornecido.
+> Enquanto estiver vazio, os botões de WhatsApp e o botão flutuante ficam
+> visíveis porém inertes (não levam a número incorreto) e o botão flutuante
+> permanece oculto. Ao preencher o número, tudo é ativado automaticamente.
+> A agenda também é pendente: "Consultar agenda" abre o WhatsApp (sem integração real de agenda).
 
 O domínio também aparece (para SEO) em:
 
@@ -41,7 +47,7 @@ O domínio também aparece (para SEO) em:
 index.html      página completa + SEO + JSON-LD
 css/style.css   estilos (mobile-first)
 js/config.js    >>> links e domínio (edite aqui) <<<
-js/main.js      menu mobile + aplicação dos links
+js/main.js      menu mobile + links + botão flutuante de WhatsApp
 favicon.svg     favicon leve em SVG
 robots.txt      regras para buscadores
 sitemap.xml     sitemap com uma URL
