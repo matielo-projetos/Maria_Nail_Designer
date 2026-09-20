@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: substituir pelo domínio definitivo
+Sitemap: https://www.marianaildesigner.com.br/sitemap.xml
