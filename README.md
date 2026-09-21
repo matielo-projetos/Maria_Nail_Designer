@@ -5,7 +5,8 @@ sem dependências e sem imagens externas. Projeto isolado: nada é importado de 
 
 ## Como visualizar
 
-Abra o arquivo `index.html` no navegador (duplo clique) ou rode um servidor local simples:
+A landing page fica em `lagoa-da-conceicao/index.html`. Abra esse arquivo no navegador
+(duplo clique) ou rode um servidor local a partir da raiz do projeto:
 
 ```powershell
 # opção 1 - Python
@@ -15,7 +16,15 @@ python -m http.server 8080
 npx --yes serve .
 ```
 
-Depois acesse `http://localhost:8080`.
+Depois acesse `http://localhost:8080/lagoa-da-conceicao`.
+
+O `index.html` da raiz apenas redireciona para `/lagoa-da-conceicao`.
+
+## URL definitiva
+
+- Landing: `https://marianaildesigner.site/lagoa-da-conceicao`
+- Canônica (sem www): `https://marianaildesigner.site/lagoa-da-conceicao`
+- `www.marianaildesigner.site` também funciona, mas redireciona para a versão sem www.
 
 ## Onde alterar WhatsApp, Instagram, Google Maps e domínio
 
@@ -37,20 +46,22 @@ Tudo fica em **`js/config.js`** (arquivo único):
 
 O domínio também aparece (para SEO) em:
 
-- `index.html` -> `<link rel="canonical">`, `og:url` e JSON-LD (`"url"`)
+- `lagoa-da-conceicao/index.html` -> `<link rel="canonical">`, `og:url` e JSON-LD (`"url"`)
+- `index.html` (raiz, redirecionamento) -> `canonical` e destino do redirect
 - `robots.txt` -> linha `Sitemap:`
 - `sitemap.xml` -> `<loc>`
 
 ## Estrutura
 
 ```
-index.html      página completa + SEO + JSON-LD
-css/style.css   estilos (mobile-first)
-js/config.js    >>> links e domínio (edite aqui) <<<
-js/main.js      menu mobile + links + botão flutuante de WhatsApp
-favicon.svg     favicon leve em SVG
-robots.txt      regras para buscadores
-sitemap.xml     sitemap com uma URL
+index.html                    redirecionamento para /lagoa-da-conceicao
+lagoa-da-conceicao/index.html landing page (URL definitiva) + SEO + JSON-LD
+css/style.css                 estilos (mobile-first)
+js/config.js                  >>> links e domínio (edite aqui) <<<
+js/main.js                    menu mobile + links + botão flutuante de WhatsApp
+favicon.svg                   favicon leve em SVG
+robots.txt                    regras para buscadores
+sitemap.xml                   sitemap com a URL definitiva
 ```
 
 ## Observações

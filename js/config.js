@@ -43,8 +43,10 @@ window.SITE_CONFIG = {
 
   /* --------------------------------------------------------
      4) DOMÍNIO
-     Usado para canonical/Open Graph/JSON-LD quando a página é
-     publicada. Também atualize robots.txt e sitemap.xml.
+     Domínio definitivo (sem www). A landing é publicada em:
+     https://marianaildesigner.site/lagoa-da-conceicao
+     Também atualize canonical/og:url/JSON-LD em
+     lagoa-da-conceicao/index.html, robots.txt e sitemap.xml.
      -------------------------------------------------------- */
-  domain: "https://www.marianaildesigner.com.br"
+  domain: "https://marianaildesigner.site"
 };
