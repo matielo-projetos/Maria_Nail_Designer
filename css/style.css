@@ -234,8 +234,8 @@ section[id] { scroll-margin-top: 5.25rem; }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap);
+  grid-template-columns: repeat(2, 1fr);
+  gap: .75rem;
 }
 
 .card {
@@ -260,6 +260,27 @@ section[id] { scroll-margin-top: 5.25rem; }
 .card__heading { font-size: 1.08rem; }
 
 .card__heading--lg { font-size: 1.5rem; }
+
+/* Cards de servico compactos no mobile: grade 2x2 */
+.grid .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem .6rem;
+}
+
+.grid .card__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: .6rem;
+}
+
+.grid .card__heading {
+  font-size: .95rem;
+  overflow-wrap: break-word;
+}
 
 .card--feature {
   border: 0;
@@ -461,6 +482,21 @@ section[id] { scroll-margin-top: 5.25rem; }
   .hero__title { font-size: 2.35rem; }
 
   .grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+
+  /* Acima do mobile os cards de servico voltam ao estilo original */
+  .grid .card {
+    display: block;
+    text-align: left;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .grid .card__icon {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: .9rem;
+  }
+
+  .grid .card__heading { font-size: 1.08rem; }
 
   .card--feature { padding: 2.25rem 2rem; }
 
