@@ -37,7 +37,7 @@
     agenda: function () { return whatsappUrl(mensagem("agenda")); },
     combo: function () { return whatsappUrl(mensagem("combo")); },
     agendar: function () { return whatsappUrl(mensagem("agendar")); },
-    sorteio: instagramUrl,
+    sorteio: function () { return config.sorteio || null; },
     instagram: instagramUrl,
     maps: function () { return config.maps || null; }
   };

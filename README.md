@@ -32,10 +32,11 @@ Tudo fica em **`js/config.js`** (arquivo único):
 
 | O que | Chave em `js/config.js` |
 |---|---|
-| Número do WhatsApp (só dígitos: `55` + DDD + número) — **hoje está vazio (pendente)** | `whatsapp` |
+| Número do WhatsApp (só dígitos: `55` + DDD + número) — **configurado** | `whatsapp` |
 | Mensagens dos botões de WhatsApp | `whatsappMessages` (`agenda`, `combo`, `agendar`, `float`) |
 | Instagram (usuário, sem `@`) | `instagram` |
 | Google Maps | `maps` |
+| Link direto do sorteio | `sorteio` |
 | Domínio do site | `domain` |
 
 > **Pendente:** `whatsapp` está vazio porque nenhum número foi fornecido.
@@ -67,5 +68,5 @@ sitemap.xml                   sitemap com a URL definitiva
 ## Observações
 
 - Nenhum telefone, endereço completo ou avaliação foi inventado.
-- O botão de sorteio aponta para o Instagram (ajuste em `js/config.js` se houver link próprio de sorteio).
-- O Google Maps usa link de busca por "Lagoa da Conceição, Florianópolis - SC".
+- O botão de sorteio aponta para o link direto configurado em `js/config.js` (`sorteio`).
+- O Google Maps usa o link direto configurado em `js/config.js` (`maps`).
